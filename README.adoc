@@ -1,0 +1,6 @@
+== Welcome!
+
+This repository is designed to allow Spring Boot users and team members to contribute self-contained projects
+reproducing issues logged against https://github.com/spring-projects/spring-boot/issues[Spring Boot's 
+issue tracker].
+
