@@ -16,7 +16,7 @@ apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
 
-// mainClassName = "multimain.Main2"
+mainClassName = "multimain.Main2"
 
 jar {
     baseName = 'demo'
@@ -33,6 +33,7 @@ dependencies {
     testCompile("org.springframework.boot:spring-boot-starter-test")
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '1.12'
+task('console', type: JavaExec) {
+    main = 'multimain.Main1'
+    classpath = project.sourceSets.main.runtimeClasspath
 }
