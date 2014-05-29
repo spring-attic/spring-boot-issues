@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="1.0"
+	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+
+	<persistence-unit name="MSJpa" transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+
+		<class>com.espn.sports.persistence.jpa.AttendanceEntity</class>
+<!-- 		<class>com.espn.sports.persistence.jpa.AwardEntity</class>
+		<class>com.espn.sports.persistence.jpa.AwardWinnerEntity</class>
+		<class>com.espn.sports.persistence.jpa.AwardWinnerTypeEntity</class> -
+		<class>com.espn.sports.persistence.jpa.CasinoEntity</class>-->
+		<class>com.espn.sports.persistence.jpa.CityEntity</class>
+		<!-- <class>com.espn.sports.persistence.jpa.CoachSeasonRecordEntity</class>
+		<class>com.espn.sports.persistence.jpa.CoachTeamEntity</class>-->
+		<class>com.espn.sports.persistence.jpa.CompetitionEntity</class>
+		<!--<class>com.espn.sports.persistence.jpa.CompetitionAnnouncerEntity</class>-->
+		<class>com.espn.sports.persistence.jpa.CompetitionMediaEntity</class>
+		<class>com.espn.sports.persistence.jpa.CompetitionNoteEntity</class>
+		<!-- <class>com.espn.sports.persistence.jpa.CompetitionOddsEntity</class>
+		<class>com.espn.sports.persistence.jpa.CompetitionOddsLogEntity</class> -->
+		<!-- <class>com.espn.sports.persistence.jpa.CompetitionOfficialEntity</class> -->
+		<class>com.espn.sports.persistence.jpa.CompetitionRosterEntryEntity</class>
+		<class>com.espn.sports.persistence.jpa.CompetitionStatusEntity</class>
+		<class>com.espn.sports.persistence.jpa.CompetitionStatusTypeEntity</class>
+		<class>com.espn.sports.persistence.jpa.CompetitionTypeEntity</class>
+		<class>com.espn.sports.persistence.jpa.CompetitorEntity</class>
+		<class>com.espn.sports.persistence.jpa.CompetitorScoreEntity</class>
+		<class>com.espn.sports.persistence.jpa.CompetitorLineScoreEntity</class>
+		<class>com.espn.sports.persistence.jpa.CompetitorTypeEntity</class>
+		<!-- <class>com.espn.sports.persistence.jpa.CurrencyEntity</class> -->
+		<class>com.espn.sports.persistence.jpa.CountryEntity</class>
+		<class>com.espn.sports.persistence.jpa.CountryRegionEntity</class>
+		<!-- <class>com.espn.sports.persistence.jpa.DataProviderEntity</class> 
+		<class>com.espn.sports.persistence.jpa.DepthChartEntryEntity</class>-->
+		<class>com.espn.sports.persistence.jpa.EventEntity</class>
+		<class>com.espn.sports.persistence.jpa.EventSeasonEntity</class>
+		<class>com.espn.sports.persistence.jpa.FeedSourceEntity</class>
+		<!-- <class>com.espn.sports.persistence.jpa.FormationEntity</class>
+		<class>com.espn.sports.persistence.jpa.FreeAgentEntity</class> -->
+		<class>com.espn.sports.persistence.jpa.GroupEntity</class>
+<!-- 		<class>com.espn.sports.persistence.jpa.ItemRankingEntity</class>
+		<class>com.espn.sports.persistence.jpa.ItemRankingTypeEntity</class> -->
+		<class>com.espn.sports.persistence.jpa.LanguageEntity</class> 
+		<class>com.espn.sports.persistence.jpa.LeagueEntity</class>
+		<class>com.espn.sports.persistence.jpa.LeagueCampaignEntity</class> 
+		<class>com.espn.sports.persistence.jpa.MaritalStatusEntity</class>
+		<class>com.espn.sports.persistence.jpa.MediaOutletEntity</class>
+		<class>com.espn.sports.persistence.jpa.MediaMarketEntity</class>
+		<class>com.espn.sports.persistence.jpa.MediaTypeEntity</class>
+		<!-- <class>com.espn.sports.persistence.jpa.OfficialPositionEntity</class> -->
+		<class>com.espn.sports.persistence.jpa.PersonEntity</class>
+		<class>com.espn.sports.persistence.jpa.PersonRoleEntity</class>
+		<class>com.espn.sports.persistence.jpa.PersonStatusEntity</class>
+		<!-- <class>com.espn.sports.persistence.jpa.PickCenterStatsEntity</class>
+		<class>com.espn.sports.persistence.jpa.PlayEntity</class> -->
+		<class>com.espn.sports.persistence.jpa.PlayTypeEntity</class>
+<!-- 		<class>com.espn.sports.persistence.jpa.PlayerNewsEntity</class>
+		<class>com.espn.sports.persistence.jpa.PlayerNewsStatusEntity</class>
+		<class>com.espn.sports.persistence.jpa.PlayerPositionEntity</class> -->
+		<class>com.espn.sports.persistence.jpa.PlayerTeamEntity</class>
+		<class>com.espn.sports.persistence.jpa.PositionEntity</class>
+		<class>com.espn.sports.persistence.jpa.PowerRankingTypeEntity</class>
+		<class>com.espn.sports.persistence.jpa.PowerRankingEntity</class>
+		<class>com.espn.sports.persistence.jpa.RegionEntity</class>
+		<class>com.espn.sports.persistence.jpa.RoleEntity</class>
+		<!-- <class>com.espn.sports.persistence.jpa.RumorEntity</class>
+		<class>com.espn.sports.persistence.jpa.RumorExtensionEntity</class>
+		<class>com.espn.sports.persistence.jpa.RumorObjectEntity</class>
+		<class>com.espn.sports.persistence.jpa.RumorSourceTypeEntity</class>
+		<class>com.espn.sports.persistence.jpa.RumorSubjectTypeEntity</class>
+		<class>com.espn.sports.persistence.jpa.RumorTypeEntity</class> -->
+		<class>com.espn.sports.persistence.jpa.SeasonEntity</class>
+		<class>com.espn.sports.persistence.jpa.SeriesEntity</class>
+		<class>com.espn.sports.persistence.jpa.ScoringSystemEntity</class>
+		<class>com.espn.sports.persistence.jpa.SplitTypeEntity</class>
+		<class>com.espn.sports.persistence.jpa.StateEntity</class>
+		<class>com.espn.sports.persistence.jpa.TeamEntity</class>
+		<class>com.espn.sports.persistence.jpa.TeamGameRecordEntity</class>
+		<class>com.espn.sports.persistence.jpa.TeamGroupEntity</class>
+		<class>com.espn.sports.persistence.jpa.TeamSeasonEntity</class>
+		<!-- <class>com.espn.sports.persistence.jpa.TeamPayrollEntity</class> -->
+		<class>com.espn.sports.persistence.jpa.TeamTransactionEntity</class>
+		<class>com.espn.sports.persistence.jpa.TeamRosterEntryEntity</class>
+		<class>com.espn.sports.persistence.jpa.TeamSeasonRecordEntity</class>
+		<!-- <class>com.espn.sports.persistence.jpa.TeamWorstEntity</class>  -->
+		<class>com.espn.sports.persistence.jpa.TournamentEntity</class>
+		<class>com.espn.sports.persistence.jpa.TournamentConfigurationEntity</class>
+		<class>com.espn.sports.persistence.jpa.TournamentGroupEntity</class>
+		<class>com.espn.sports.persistence.jpa.TournamentMatchupEntity</class>
+		<class>com.espn.sports.persistence.jpa.TournamentMatchupCompetitorEntity</class>
+		<class>com.espn.sports.persistence.jpa.TournamentMatchupSeasonEntity</class>
+		<class>com.espn.sports.persistence.jpa.TournamentMatchupGroupEntity</class>
+		<class>com.espn.sports.persistence.jpa.TournamentGroupSeasonEntity</class>
+		<class>com.espn.sports.persistence.jpa.TournamentMatchupTypeEntity</class> 
+		<class>com.espn.sports.persistence.jpa.TournamentSeasonEntity</class>
+		<class>com.espn.sports.persistence.jpa.TournamentTypeEntity</class>
+		<class>com.espn.sports.persistence.jpa.VenueEntity</class>
+		<class>com.espn.sports.persistence.jpa.WeekEntity</class>
+
+		<class>com.espn.sports.persistence.motorsports.jpa.CarEntity</class>
+		<class>com.espn.sports.persistence.motorsports.jpa.ChassisEntity</class>
+		<!-- <class>com.espn.sports.persistence.motorsports.jpa.DriverCareerStatsEntity</class> -->
+		<class>com.espn.sports.persistence.motorsports.jpa.DriverRaceStatsEntity</class>
+		<class>com.espn.sports.persistence.motorsports.jpa.RacingPersonRecordEntity</class>
+		<!-- <class>com.espn.sports.persistence.motorsports.jpa.RacingPersonGameRecordEntity</class> -->
+		<class>com.espn.sports.persistence.motorsports.jpa.RacingPersonSeasonRecordEntity</class>
+		<class>com.espn.sports.persistence.motorsports.jpa.DriverSeasonStatsEntity</class>
+		<class>com.espn.sports.persistence.motorsports.jpa.DriverStatsEntity</class>
+		<class>com.espn.sports.persistence.motorsports.jpa.RacingCompetitorEntity</class>
+		<class>com.espn.sports.persistence.motorsports.jpa.RacingCompetitorLineScoreEntity</class>
+		<class>com.espn.sports.persistence.motorsports.jpa.RacingCompetitionEntity</class>
+		<!-- <class>com.espn.sports.persistence.motorsports.jpa.RacingPlayEntity</class> -->
+		<class>com.espn.sports.persistence.motorsports.jpa.RacingStatsEntity</class>
+		<class>com.espn.sports.persistence.motorsports.jpa.RacingTeamEntity</class>
+		<!-- <class>com.espn.sports.persistence.motorsports.jpa.RacingTeamGameRecordEntity</class> -->
+		<class>com.espn.sports.persistence.motorsports.jpa.RacingTeamRaceStatsEntity</class>
+		<class>com.espn.sports.persistence.motorsports.jpa.RacingTeamRecordEntity</class>
+		<class>com.espn.sports.persistence.motorsports.jpa.RacingTeamSeasonRecordEntity</class>
+		<class>com.espn.sports.persistence.motorsports.jpa.RacingTeamSeasonStatsEntity</class>
+		<!-- <class>com.espn.sports.persistence.motorsports.jpa.RacingTeamCareerStatsEntity</class> -->
+		<class>com.espn.sports.persistence.motorsports.jpa.RacingTeamStatsEntity</class>
+		<class>com.espn.sports.persistence.motorsports.jpa.RacingVenueEntity</class>
+		<class>com.espn.sports.persistence.motorsports.jpa.RacingVenueTypeEntity</class>
+		<class>com.espn.sports.persistence.motorsports.jpa.ManufacturerEntity</class>
+		<class>com.espn.sports.persistence.motorsports.jpa.TyreEntity</class>
+		<class>com.espn.sports.persistence.motorsports.jpa.SponsorEntity</class>
+		<class>com.espn.sports.persistence.motorsports.jpa.EngineEntity</class>
+		<class>com.espn.sports.persistence.motorsports.jpa.RacingCompetitorScoreEntity</class>
+		<class>com.espn.sports.persistence.motorsports.jpa.RacingClassificationEntity</class>
+		<class>com.espn.sports.persistence.motorsports.jpa.RacingCompetitorTypeEntity</class>
+		<class>com.espn.sports.persistence.motorsports.jpa.TrackConfigurationEntity</class>
+
+		<properties>
+			<!-- <property name="hibernate.archive.autodetection" value="class, hbm" 
+				/> -->
+			<property name="hibernate.archive.autodetection" value="none" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.SQLServerDialect" />
+
+			<!-- sql server db config -->
+			<property name="hibernate.connection.driver_class"	value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+			<property name="hibernate.connection.isolation" value="1" />
+            <!-- <property name="hibernate.connection.url" value="jdbc:sqlserver://vwdssql03.corp.espn3.com;databaseName=sMotorsports;sendStringParametersAsUnicode=false" />
+            <property name="hibernate.connection.username" value="smotorsportsmsg" />
+            <property name="hibernate.connection.password" value="$*0e3J1S2U" /> -->
+            <property name="hibernate.connection.url" value="jdbc:sqlserver://VWBDDB01.corp.espn3.com;databaseName=SportWareMotorsportXO;sendStringParametersAsUnicode=false" />
+            <property name="hibernate.connection.username" value="psuser" />
+            <property name="hibernate.connection.password" value="Espn1234" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="true" />
+			<property name="espn.sportId" value="90" />
+
+			<!-- configuration pool via c3p0 -->
+			<!-- <property name="hibernate.connection.provider_class" value="org.hibernate.connection.C3P0ConnectionProvider" />
+			<property name="hibernate.c3p0.acquire_increment" value="5" />
+			<property name="hibernate.c3p0.idle_test_period" value="100" />
+			<property name="hibernate.c3p0.min_size" value="10" />
+			<property name="hibernate.c3p0.max_size" value="25" />
+			<property name="hibernate.c3p0.timeout" value="60" />
+			<property name="hibernate.c3p0.max_statements" value="100" /> -->
+
+			<!-- Ehcache config properties -->
+			<property name="hibernate.cache.use_second_level_cache"	value="false" />
+			<property name="hibernate.cache.use_query_cache" value="false" />
+			<!-- <property name="hibernate.cache.provider_class" value="net.sf.ehcache.hibernate.EhCacheProvider"/> 
+				<property name="hibernate.cache.provider_configuration_file_resource_path" value="/META-INF/ehcache.xml" /> -->
+
+		</properties>
+
+	</persistence-unit>
+
+</persistence>
+

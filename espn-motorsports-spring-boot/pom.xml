@@ -1,0 +1,220 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.espn.sports.motorsports</groupId>
+	<parent>
+		<groupId>com.espn.api.boot</groupId>
+		<artifactId>espn-boot</artifactId>
+		<version>0.9.3-SNAPSHOT</version>
+	</parent>
+	<artifactId>espn-motorsports-spring-boot</artifactId>
+	<packaging>war</packaging>
+	<properties>
+		<maven.test.skip>true</maven.test.skip>
+		<motorsports.version>2.1.0-SNAPSHOT</motorsports.version>
+		<!-- <spring-boot.version>1.0.0.RC3</spring-boot.version> -->
+	</properties>
+
+	<dependencies>
+
+		<!-- Spring "Bill of Materials" -->
+		<!-- <dependency> <groupId>org.springframework</groupId> <artifactId>spring-framework-bom</artifactId> 
+			<version>4.0.0.RC2</version> <type>pom</type> <scope>import</scope> </dependency> -->
+
+		<!-- spring context -->
+		<!-- <dependency> <groupId>org.springframework</groupId> <artifactId>spring-context</artifactId> 
+			<version>4.0.1.RELEASE</version> </dependency> -->
+
+		<!-- Spring boot dependencies 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<version>${spring-boot.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>ch.qos.logback</groupId>
+					<artifactId>logback-classic</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+			<version>${spring-boot.version}</version>
+		</dependency>-->
+		
+		 <dependency>
+            <groupId>com.espn.api.boot</groupId>
+            <artifactId>espn-boot-core-apis</artifactId>
+            <exclusions>
+            	<exclusion>
+            		<groupId>org.springframework.boot</groupId>
+            		<artifactId>spring-boot-starter-tomcat</artifactId>
+            	</exclusion>
+            </exclusions>
+        </dependency>
+        
+        <dependency>
+        	<groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+		<!-- INCLUDE MOTORSPORTS CLIENT -->
+
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>4.3.3.Final</version>
+		</dependency>
+		
+		 <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+            <version>${groovy.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		
+		<!-- <dependency>
+			<groupId>org.yaml</groupId>
+			<artifactId>snakeyaml</artifactId>
+		</dependency> -->
+		
+		<!-- <dependency>
+			<groupId>com.espn.sports.motorsports</groupId>
+			<artifactId>motorsports-persistence</artifactId>
+			<version>${motorsports.version}</version>
+			<scope>compile</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>com.espn.infra.ops</groupId>
+					<artifactId>operations-runtime</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency> -->
+		
+		<dependency>
+			<groupId>com.espn.sports.motorsports</groupId>
+			<artifactId>motorsports-dao</artifactId>
+			<version>${motorsports.version}</version>
+			<scope>compile</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>com.espn.infra.ops</groupId>
+					<artifactId>operations-runtime</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.hibernate</groupId>
+					<artifactId>hibernate-core-espn-patch</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		
+		<dependency> 
+			<groupId>com.microsoft.sqlserver</groupId> 
+			<artifactId>sqljdbc4</artifactId> 
+			<version>4.0</version> 
+		</dependency> 
+
+		<!--  Excluding motorsports-client as we are trying to inject dao classes directly--> 
+		
+		<!-- <dependency>
+			<groupId>com.espn.sports.motorsports</groupId>
+			<artifactId>motorsports-client</artifactId>
+			<version>${motorsports.version}</version>
+			<scope>compile</scope>
+			<exclusions>
+				THE FOLLOWING ARE PROVIDED BY THE EJB
+				<exclusion>
+					<groupId>com.espn.sports.motorsports</groupId>
+					<artifactId>motorsports-dao</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.espn.sports.common</groupId>
+					<artifactId>common-spi</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.espn.sports.motorsports</groupId>
+					<artifactId>motorsports-spi</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency> -->
+
+		<!-- ESPN CORE API PLUGIN 
+			Commenting this as this is a part of boot-core-apis dependency.
+		-->
+		<!-- <dependency>
+			<groupId>com.espn.api</groupId>
+			<artifactId>espn-core-api</artifactId>
+			<version>0.1.0-SNAPSHOT</version>
+			<scope>compile</scope>
+			<type>zip</type>
+		</dependency> -->
+
+	</dependencies>
+
+	<build>
+		<!-- <finalName>motorsports-app</finalName> -->
+		<plugins>
+			<!-- <plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin> -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.1.1</version>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+					<warName>espn-motorsports-spring-boot</warName>
+				</configuration>
+			</plugin>
+			<!-- <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<extensions>true</extensions>
+				<configuration>
+					<compilerId>groovy-eclipse-compiler</compilerId>
+					set verbose to be true if you want lots of uninteresting messages
+					<verbose>true</verbose>
+					<fork>false</fork>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.codehaus.groovy</groupId>
+						<artifactId>groovy-eclipse-compiler</artifactId>
+						<version>2.8.0-01</version>
+					</dependency>
+					for 2.8.0-01 and later you must have an explicit dependency on 
+						groovy-eclipse-batch
+					<dependency>
+						<groupId>org.codehaus.groovy</groupId>
+						<artifactId>groovy-eclipse-batch</artifactId>
+						<version>2.1.8-01</version>
+					</dependency>
+				</dependencies>
+			</plugin> -->
+		</plugins>
+	</build>
+	<version>0.1.0-SNAPSHOT</version>
+	<!-- <dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>${spring.boot.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement> -->
+</project>
