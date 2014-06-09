@@ -23,7 +23,7 @@ import org.springframework.context.annotation.ImportResource;
  * @author Andy Wilkinson
  */
 @EnableAutoConfiguration
-@ImportResource(value = "application-context-neo4j.xml")
+@ImportResource(value = "application-context.xml")
 public class Application {
 
 	public static void main(String[] args) {
