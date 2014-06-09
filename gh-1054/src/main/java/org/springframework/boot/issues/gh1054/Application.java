@@ -15,16 +15,33 @@
  */
 package org.springframework.boot.issues.gh1054;
 
+import org.neo4j.graphdb.GraphDatabaseService;
+import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.annotation.Bean;
+import org.springframework.data.neo4j.config.Neo4jConfiguration;
+import org.springframework.data.neo4j.support.MappingInfrastructureFactoryBean;
+
 
 /** 
  * @author Andy Wilkinson
  */
 @EnableAutoConfiguration
-@ImportResource(value = "application-context.xml")
-public class Application {
+// @ImportResource(value = "application-context-neo4j.xml")
+public class Application extends Neo4jConfiguration {
+	
+	@Bean
+	public GraphDatabaseService graphDatabaseService() {
+		return new GraphDatabaseFactory().newEmbeddedDatabase("target/test");
+	}
+	
+	@Override
+	public MappingInfrastructureFactoryBean mappingInfrastructure() throws Exception {
+		MappingInfrastructureFactoryBean mapping = super.mappingInfrastructure();
+		mapping.afterPropertiesSet();
+		return mapping;
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
