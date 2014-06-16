@@ -48,4 +48,4 @@ $ GITHUB_TOKEN=ccdbf257f052a594a0e7bd2823a69ae38a48ffb1 mvn clean spring-boot:..
 2014-06-16 15:45:41.915  INFO 75932 --- [       Thread-2] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
 ----
 
-NOTE: Everything shown between `[[Remove the stuff above]]` and `[[Remove the stuff below]]` shouldn't appear at all. Otherwise, it's not very quiet.
+NOTE: Only the bits between `[[Remove the stuff above]]` and `[[Remove the stuff below]]` should be shown. Otherwise, the quiet option just isn't working.
