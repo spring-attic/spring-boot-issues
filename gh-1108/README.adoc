@@ -1,0 +1,51 @@
+== Issue
+
+This is code that replicates https://github.com/spring-projects/spring-boot/issues/1108. 
+
+This code is a script designed to trim out the text between the time stamp, and the actual message shown to the right of the ":". After that, any lines more than 80 characters long, 
+are trimmed to 80 characters, with the last 3 replaced with "...". The idea is to show how functional `spring` is for building scripts. But with all the extra cruft, people
+won't want to pick it up.
+
+== How to reproduce
+
+Assuming you have Spring Boot CLI 1.1.1.RELEASE installed,
+
+----
+$ spring run -q bootconsole.groovy < fragment_01.txt 
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (v1.1.1.RELEASE)
+
+2014-06-16 15:45:40.963  INFO 75932 --- [       runner-0] o.s.boot.SpringApplication               : Starting application on retina with PID 75932 (/Users/gturnquist/.m2/repository/org/springframework/boot/spring-boot/1.1.1.RELEASE/spring-boot-1.1.1.RELEASE.jar started by gturnquist in /Users/gturnquist/src/spring-boot-issues/gh-1108)
+2014-06-16 15:45:41.171  INFO 75932 --- [       runner-0] s.c.a.AnnotationConfigApplicationContext : Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@77fc501e: startup date [Mon Jun 16 15:45:41 EDT 2014]; root of context hierarchy
+2014-06-16 15:45:41.765  INFO 75932 --- [       runner-0] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+[[Remove the stuff above]]
+$ GITHUB_TOKEN=ccdbf257f052a594a0e7bd2823a69ae38a48ffb1 mvn clean spring-boot:...
+[INFO] Scanning for projects...
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Issue Manager 0.0.1-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+...
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (v1.1.1.RELEASE)
+
+2014-06-11 16:55:13.685 ... : Starting Application on retina with PID 54449 (/...
+...
+[[Remove the stuff below]]
+2014-06-16 15:45:41.912  INFO 75932 --- [       runner-0] o.s.boot.SpringApplication               : Started application in 1.265 seconds (JVM running for 3.183)
+2014-06-16 15:45:41.914  INFO 75932 --- [       Thread-2] s.c.a.AnnotationConfigApplicationContext : Closing org.springframework.context.annotation.AnnotationConfigApplicationContext@77fc501e: startup date [Mon Jun 16 15:45:41 EDT 2014]; root of context hierarchy
+2014-06-16 15:45:41.915  INFO 75932 --- [       Thread-2] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+----
+
+NOTE: Everything shown between `[[Remove the stuff above]]` and `[[Remove the stuff below]]` shouldn't appear at all. Otherwise, it's not very quiet.
