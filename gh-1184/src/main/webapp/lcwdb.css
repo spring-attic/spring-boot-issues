@@ -1,0 +1,85 @@
+#resultsTable{
+ 	border: 2px solid black;
+ 	margin-top: 25px;
+ 	margin-bottom: 25px;
+}
+
+body{
+	background-color:LightGray;
+}
+
+#mainBody{
+	width: 80%;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+#resultsTable tr th, #resultsTable tr td{
+ 	border: 1px solid black;
+ 	text-align: center;
+ 	padding: 2px;
+}
+
+p.warn{
+	color: Red;
+}
+
+p.queryHelp{
+	font-style: italic;
+	font-size: small;	
+}
+
+.queryError{
+	font-style: italic;
+	color: Red;	
+}
+
+.soldier {
+	color: Black;
+	background-color: White;
+	border: 2px solid #191970;
+	margin-top: 25px;
+	margin-bottom: 25px;
+	padding: 10px;
+}
+
+.soldierMultilineResultData{
+	margin-left: 25px;
+}
+
+.footer{
+	font-style: italic;
+	font-size: small;
+	text-align: right;
+	margin-top: 25px;
+	margin-bottom: 25px;
+}
+
+.header {
+	color: white;
+	background-color: #191970;
+	border: 2px solid LightGray;
+	font-style: italic;
+	text-align: center;
+	margin-top: 25px;
+	margin-bottom: 25px;
+}
+
+.error {
+	color: Black;
+	background-color: White;
+	border: 2px solid Red;
+	margin-top: 25px;
+	margin-bottom: 25px;
+	padding: 10px;
+}
+
+.error h2{
+	font-style: italic;
+	color: red;
+	text-align: center;
+}
+
+.error p{
+	text-align: left;
+}
