@@ -1,0 +1,56 @@
+buildscript {
+	repositories { 
+		mavenCentral() 
+	}
+	dependencies {
+		classpath('org.springframework.boot:spring-boot-gradle-plugin:1.1.4.RELEASE')
+	}
+}
+
+configure(subprojects) { project ->
+
+	apply {
+		plugin 'java'
+		plugin 'idea'
+		plugin 'eclipse'
+	}
+
+	sourceCompatibility = 1.8
+	targetCompatibility = 1.8
+
+	repositories {
+		mavenCentral()
+	}
+
+}
+
+project('b') {
+
+	apply {
+		plugin 'spring-boot'
+	}
+
+	configurations {
+		provided
+	}
+
+	sourceSets.main.compileClasspath += configurations.provided
+
+	dependencies {
+		provided(project(":c"))
+		provided(project(":d"))
+		compile('org.springframework.boot:spring-boot-starter-web')
+		testCompile('org.springframework.boot:spring-boot-starter-test')
+	}
+
+}
+
+project('c') {
+}
+
+project('d') {
+}
+
+task wrapper(type: Wrapper) {
+	gradleVersion = '2.0'
+}
