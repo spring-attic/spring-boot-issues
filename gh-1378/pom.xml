@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.1.5.RELEASE</version>
+    </parent>
+
+    <groupId>org.springframework.boot.issues</groupId>
+    <artifactId>sample-1378</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+
+    <description>Sample project to illustrate bug: https://github.com/spring-projects/spring-boot/issues/1378</description>
+    <url>https://github.com/spring-projects/spring-boot/issues/1378</url>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>sample-1378-service</module>
+        <module>sample-1378-web</module>
+    </modules>
+
+    <properties>
+        <!-- Overrides from spring-boot-starter-parent -->
+        <java.version>1.8</java.version>
+        <tomcat.version>8.0.9</tomcat.version>
+    </properties>
+</project>
