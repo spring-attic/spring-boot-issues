@@ -4,3 +4,9 @@
 .settings
 build
 bin
+target
+
+target
+.idea
+*.iml
+*~
