@@ -1,0 +1,37 @@
+def vJavaLang = 1.7
+
+def javaProjects = [
+        project(':gh-1368-main-app'),
+        project(':gh-1368-common'),
+]
+
+configure(allprojects) {
+
+    apply plugin: 'idea'
+
+    repositories {
+        mavenCentral()
+    }
+}
+
+configure(rootProject) {
+
+    idea.project {
+        languageLevel = vJavaLang
+    }
+
+}
+
+configure(javaProjects) {
+
+    apply plugin: 'java'
+
+    targetCompatibility = vJavaLang
+    sourceCompatibility = vJavaLang
+
+    dependencies {
+
+    }
+
+
+}
