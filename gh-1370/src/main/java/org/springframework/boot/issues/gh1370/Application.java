@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.configurers.GlobalAuthenticationConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
@@ -18,14 +19,19 @@ public class Application {
     }
 
     @Configuration
+    static class AuthenticationConfiguration extends GlobalAuthenticationConfigurerAdapter {
+
+    	@Override
+    	public void init(AuthenticationManagerBuilder auth) throws Exception {
+    		auth.inMemoryAuthentication()
+    		.withUser("sample").password("secret").roles("USER");
+    	}
+    	
+    }
+    
+    @Configuration
     @EnableWebSecurity
     static class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
-
-        @Override
-        protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-            auth.inMemoryAuthentication()
-                    .withUser("sample").password("secret").roles("USER");
-        }
 
     }
 }
