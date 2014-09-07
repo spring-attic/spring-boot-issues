@@ -1,0 +1,222 @@
+/*
+    Laurence Toenjes - faroe228 - 9/7/2014
+
+    https://github.com/spring-projects/spring-boot/issues/1091
+    
+    My test example that shows the logback.groovy gets evaluated twice.
+    
+    I noticed this problem when I started to create custom appenders
+    in logback.groovy (they were being created twice in spring-boot).
+    
+    I'm guessing this double logback.groovy evaluation was a possible cause for 
+    the double logging output reported by PeterNSteinmetz commented on Jun 12.
+*/
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.1.5.RELEASE")
+    }
+}
+
+// ############################
+defaultTasks( 'clean', 'test' )
+// ############################
+
+task( 'nop' ) << {  }
+
+project.ext.gi = groovy.inspect.swingui.ObjectBrowser.&inspect; // for debug e.g. gi( someObj );
+// project.ext.localTmpDir = file( ".tmp" ).canonicalFile;
+// ant.mkdir( dir: localTmpDir );
+
+// pick one plugin - java or groovy
+// apply plugin: 'java'
+apply plugin: 'groovy'
+
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'spring-boot' // ###
+
+// ### IDEA 12.x tweak (latest versions of IDEA do not need this)
+// This block might have to be commented out for later versions of IDEA.
+// This stops compiling of groovy resource files e.g. logback.groovy etc.
+// I have not tried this on a later version of IDEA - will it cause problems?
+idea {
+    project {
+        wildcards += 'resources:**'
+    }
+}
+
+// ##########################################################
+apply from: file("helpers/helperAllowSkipTests.gradle").path;
+// ##########################################################
+
+clean.doLast {
+	ant.delete( dir: file('log').path )
+}
+
+// ### next line very important for testing
+// we need the app jar to be built before doing a test run
+test.dependsOn( 'assemble' )
+
+jar {
+    // this jar block must come before other tasks that depend on this e.g. test
+    // because jar.archivePath will be "stale"
+    // baseName = 'gs-spring-boot' // ###
+    // version =  '0.1.0'          // ###
+}
+
+// def testOutputFilter = this.&_testOutputFilter1;
+
+test {
+    // gi test;
+	// gi testLogging;
+	
+	// capture and tone down the test console output verbosity
+	// DO NOT USE WITH: testLogging.showStandardStreams = true;
+    onOutput( this.&testOutputFilter1 );
+    
+    testLogging { // show test status events in console
+        events 'started', 'passed'
+    }
+    
+    doFirst {
+        def buildLibsDir = file("build/libs").canonicalFile;
+        assert buildLibsDir.exists();
+        // let the tests know where to find the jars to run
+        systemProperty( "test.buildLibsDirPath", buildLibsDir.path )
+    }
+}
+
+bootRepackage.doLast {
+    generateFixedJar();
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+	compile("org.codehaus.groovy:groovy-all") // make AntBuilder available
+	compile("org.apache.ant:ant:1.9.3")       // make AntBuilder available
+	
+    compile("org.springframework.boot:spring-boot-starter-web")
+    // compile("org.springframework.boot:spring-boot-starter-actuator")
+    	
+    testCompile("junit:junit")
+}
+
+gradle.buildFinished {
+    def dt = java.awt.Desktop.desktop;
+    def showFile = { File itFile ->
+        if( itFile?.exists() ) { dt.browse( itFile.toURI() ) }    
+    } ;
+    
+    def didTest = project.properties.test?.didWork;
+    if (didTest) { 
+        def htmlTestReportFile = test.reports.find { it.name == 'html' }?.entryPoint;
+        showFile( htmlTestReportFile );
+    }
+    
+    def calcVisibleWindows = { java.awt.Frame.frames.findAll { it.visible } } ;
+    // idle until all ui windows closed
+    while ( calcVisibleWindows() ) { Thread.sleep( 250 ); }
+}
+
+def generateFixedJar() {
+    // ### created fixed logback.groovy jar ###
+    // This uses a copy of the project's main jar and modifies it
+    // e.g. unzip/explode, modify and zip
+    // called by bootRepackage.doLast 
+    
+    // this routine usually takes between 500 ms to 1500 ms
+    // on a newer win 7 machine and an older mac mini
+    def t1 = new Date().time; // start time
+    def blockSep = { ant.echo "### " + "#"*80; }
+    blockSep();
+    
+    String newJarName = (jar.archivePath.name - '.jar') + '-fixed.jar';
+    
+    ant.echo "### creating second jar file: build/libs/${ newJarName }"
+    def explodedJarDir =  file("build/explodedJar");
+    
+    // ### unzip/explode original jar
+    ant.unzip( src: jar.archivePath.path, dest: explodedJarDir.path );
+    ant.echo "### exploded ${jar.archivePath.name}"
+    
+    // ### modify
+    // rename logback.groovy
+    def lbSrcFile  = new File( explodedJarDir, 'logback.groovy');
+    def lbDestFile = new File( explodedJarDir, 'logback-config.groovy');
+    ant.move( 'file': lbSrcFile.path, tofile: lbDestFile.path );
+    ant.echo( "### renamed ${lbSrcFile.name} to ${lbDestFile.name}" )
+    
+    // update application.properties
+    def appPropsFile = new File( explodedJarDir, "application.properties" );
+    def appProps = new Properties();
+    appProps.load( appPropsFile.newReader() );
+    String sKey   = "logging.config";
+    String sValue = 'classpath:' + lbDestFile.name;
+    appProps[ sKey ] = sValue;
+    appProps.store( appPropsFile.newWriter(), "updated ${sKey}" );
+    // fix classpaths that Properties.store method messed up
+    appPropsFile.text = appPropsFile.text.replace( "classpath\\:", "classpath:" );
+    ant.echo( """### updated application.properties ${sKey}=${sValue}""" );
+    
+    File newJarFile = new File(jar.archivePath.parentFile, newJarName);
+    
+    // ### zip
+    // ### compress must be false !!!
+    ant.zip( compress: 'false'
+        , basedir: explodedJarDir.path 
+        , destfile: newJarFile.path )
+        
+    def t2    = new Date().time; // stop time
+    def delta = t2 - t1;
+    ant.echo "### created build/libs/${ newJarFile.name }"
+    ant.echo "### in ${delta} ms"
+    blockSep();
+}
+
+def testOutputFilter1( descriptor, event ) {
+        // capture and tone down the test console output verbosity
+        // blast new line noise
+        String sMsg = "${event.message}".replace('\r','').replace('\n','').trim();
+        String sExecToken = "[exec] "
+        int idxExec = sMsg.indexOf( sExecToken );
+        if ( sMsg.startsWith(sExecToken) ) {
+            sMsg = sMsg.substring( sExecToken.size() );
+         
+            // handle truncatedMsg
+            int mx = 80;
+            def lastIdx = [mx, sMsg.size()].min();
+            String suffix = (sMsg.size() > mx) ? "..." : "";
+            String truncatedMsg = sMsg.substring(0,lastIdx) + suffix;
+            
+            def msgSplit = sMsg.split().toList();
+            3.times { msgSplit << '' } // quick and dirty prevent idx out of bounds
+            
+            def skips = []
+            
+            skips << msgSplit[2].startsWith('Map')
+            
+            /* filter out logging messages that are happening before logback.groovy
+                 they have a different format */
+            // skips << sMsg.contains(  " |-INFO " );
+            // http://www.autohotkey.com/docs/misc/RegEx-QuickRef.htm
+            skips << sMsg.matches( /\d+:\d+:\d+,\d+\s+\|\-\w.*/ )
+
+            def skip = skips.any();
+            
+            if(!skip) {
+                System.out.println( "    " + truncatedMsg );
+            }
+        }
+}
+
+// ###################################################
+task wrapper(type: Wrapper) { gradleVersion = '1.11' }
+// ###################################################
+
