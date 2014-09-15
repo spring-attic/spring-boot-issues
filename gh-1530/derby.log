@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Mon Sep 15 15:41:46 CEST 2014:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.1 - (1616546): instance a816c00e-0148-798c-3be9-00000ac07308 
+on database directory memory:/home/patoi/work/git_local/patoi/spring-boot-issues/gh-1530/testdb with class loader sun.misc.Launcher$AppClassLoader@612dcb8c 
+Loaded from file:/home/patoi/.m2/repository/org/apache/derby/derby/10.11.1.1/derby-10.11.1.1.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.7.0_45-b18
+user.dir=/home/patoi/work/git_local/patoi/spring-boot-issues/gh-1530
+os.name=Linux
+os.arch=amd64
+os.version=3.13.0-35-generic
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
