@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration scan="true" scanPeriod="2 seconds" debug="true">
+  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>[Boot] TRY-TO-CHANGE-ME %m%n</pattern>
+    </encoder>
+  </appender>
+
+  <logger name="demo" level="DEBUG" >
+    <appender-ref ref="CONSOLE" />
+  </logger>
+</configuration>
