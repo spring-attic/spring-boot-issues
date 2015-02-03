@@ -25,7 +25,8 @@ def spring = [
         'org.springframework.boot:spring-boot-starter-web',
         'org.springframework.boot:spring-boot-starter-security',
         "org.springframework.boot:spring-boot-starter-actuator",
-        "org.springframework.boot:spring-boot-starter-websocket"
+        "org.springframework.boot:spring-boot-starter-websocket",
+        'org.springframework.integration:spring-integration-jmx'
 ]
 
 def tomcatVersion = '8.0.15'
