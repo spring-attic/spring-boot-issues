@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="
+              http://www.springframework.org/schema/beans
+              http://www.springframework.org/schema/beans/spring-beans.xsd
+              http://www.springframework.org/schema/security
+              http://www.springframework.org/schema/security/spring-security.xsd">
+    
+    <http auto-config="false" create-session="stateless" access-decision-manager-ref="accessDecisionManager">
+        <intercept-url pattern="/**"                                 access="ROLE_SUPERUSER"/>
+
+        <http-basic />
+    </http>
+
+    <authentication-manager alias="authenticationManager">
+        <authentication-provider>
+            <user-service>
+                <user name="sample"    password="sample"    authorities="ROLE_SUPERUSER" />
+            </user-service>
+        </authentication-provider>
+    </authentication-manager>
+
+    <beans:bean id="accessDecisionManager" class="org.springframework.security.access.vote.AffirmativeBased">
+        <beans:property name="decisionVoters">
+            <beans:list>
+                <beans:ref bean="roleVoter" />
+                <beans:ref bean="authenticatedVoter" />
+            </beans:list>
+        </beans:property>
+    </beans:bean>
+
+    <beans:bean id="authenticatedVoter" class="org.springframework.security.access.vote.AuthenticatedVoter" />
+
+    <beans:bean id="roleVoter" class="org.springframework.security.access.vote.RoleHierarchyVoter">
+        <beans:constructor-arg ref="roleHierarchy" />
+    </beans:bean>
+
+    <beans:bean id="roleHierarchy" class="org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl">
+        <beans:property name="hierarchy">
+            <beans:value>
+                ROLE_SUPERUSER > ROLE_INTERNAL
+                ROLE_SUPERUSER > ROLE_ADMIN
+                ROLE_INTERNAL > ROLE_USER
+                ROLE_ADMIN > ROLE_USER
+            </beans:value>
+        </beans:property>
+    </beans:bean>
+
+
+</beans:beans>

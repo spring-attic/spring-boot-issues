@@ -1,0 +1,75 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.1.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+
+jar {
+    baseName = 'sample'
+}
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+def spring = [
+        'org.springframework.boot:spring-boot-starter-web',
+        'org.springframework.boot:spring-boot-starter-security',
+        "org.springframework.boot:spring-boot-starter-actuator",
+        "org.springframework.boot:spring-boot-starter-websocket"
+]
+
+def tomcatVersion = '8.0.15'
+def tomcat = "org.apache.tomcat:tomcat-catalina-jmx-remote:${tomcatVersion}"
+
+
+def apache = [
+        'org.apache.httpcomponents:httpclient:4.3.5',
+        'org.apache.httpcomponents:httpasyncclient:4.0.2'
+]
+
+
+def c3p0 = 'c3p0:c3p0:0.9.1.2'
+def mysql = 'mysql:mysql-connector-java:5.1.23'
+def gson = 'com.google.code.gson:gson:2.2.2'
+def logstash = 'net.logstash.logback:logstash-logback-encoder:3.0'
+
+dependencies {
+    compile         spring, tomcat, c3p0, mysql, gson, apache, logstash
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+}
+
+bootRun.dependsOn compileTestJava
+
+bootRun { task ->
+    systemProperties['spring.profiles.active'] = System.properties['spring.profiles.active'] ?: 'local'
+    systemProperties['com.sun.management.jmxremote.port'] = 18080
+    systemProperties['com.sun.management.jmxremote.authenticate'] = false
+    systemProperties['com.sun.management.jmxremote.ssl'] = false
+    systemProperties['java.rmi.server.hostname'] = '192.168.33.50'
+
+    if (project.hasProperty('args')) {
+        args project.args.split('\\s+')
+    }
+}
+
+test { task ->
+    System.properties['spring.profiles.active'] = System.properties['spring.profiles.active'] ?: 'local'
+
+    if(System.properties['run.integration.tests'] != 'true') {
+        exclude '**/*ITest.*'
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.2.1'
+}
