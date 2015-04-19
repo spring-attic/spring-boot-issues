@@ -1,0 +1,10 @@
+logging.path: ./
+
+logging.level.org.springframework.web: WARN
+    
+
+   
+
+
+
+

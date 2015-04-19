@@ -1,0 +1,71 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'spring-boot'
+apply plugin: 'war'
+apply plugin: 'jacoco'
+
+// Need this after apply plugin: 'eclipse'
+sourceCompatibility=1.7
+targetCompatibility=1.7
+
+buildscript {
+    repositories {
+        maven { url "http://repo.spring.io/libs-release" }
+        mavenLocal()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.2.3.RELEASE'
+        classpath 'org.springframework:springloaded:1.2.1.RELEASE'
+    }
+}
+
+war {
+    baseName = rootProject.name
+    version =  version
+    archiveName = baseName+'_'+version+'.war'
+    from 'static'
+}
+
+jar {
+    baseName = rootProject.name
+    version =  version
+}
+
+processResources {
+    //Makes gradle props available to spring
+    //expand(project.properties)
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+    
+    maven { url "http://repo.spring.io/libs-release" }
+}
+
+configurations { // Required for the war task
+    providedRuntime }
+
+dependencies {
+    compile (
+            "org.springframework.boot:spring-boot-starter-actuator",
+            "org.apache.httpcomponents:httpasyncclient:4.0.2",
+            "org.springframework.boot:spring-boot-starter-web",
+            )
+    providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
+}
+
+test {
+    finalizedBy jacocoTestReport  
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        html.enabled true
+    }
+}
+
+task wrapper(type: Wrapper) { gradleVersion = '2.21' }
+
