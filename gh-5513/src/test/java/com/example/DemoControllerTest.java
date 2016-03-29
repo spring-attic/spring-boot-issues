@@ -39,7 +39,7 @@ public class DemoControllerTest {
 
     @Test
     public void testDateTimeZone() throws Exception {
-        String expected = "2016-03-28T00:15:45.000+0600";
+        String expected = "2016-03-28T00:15:45.341+06:00";
 
         this.mockMvc
             .perform(get("/test"))

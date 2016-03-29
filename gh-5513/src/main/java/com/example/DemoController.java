@@ -17,7 +17,7 @@ public class DemoController {
     private RestTemplate restTemplate;
 
     private FooResponse getFoo() throws IOException, URISyntaxException {
-        URI uri = new URI("http://www.mocky.io/v2/56fa8c46110000ce2ba721c1");
+        URI uri = new URI("http://www.mocky.io/v2/56faab45100000e402687857");
 
         return restTemplate.getForObject(uri, FooResponse.class);
     }
