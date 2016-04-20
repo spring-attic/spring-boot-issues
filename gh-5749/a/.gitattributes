@@ -1,0 +1,16 @@
+# DOS line endings
+*.bat binary
+# Unix line endings
+*.sh text eol=lf
+Dockerfile text eol=lf
+
+*.css text
+*.html text
+*.js text
+*.md text
+*.txt text
+
+*.gif binary
+*.png binary
+*.PNG binary
+*.pptx binary
