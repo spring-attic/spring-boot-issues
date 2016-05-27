@@ -1,0 +1,10 @@
+resource:
+ image: example/resource
+ ports:
+  - "8081:8080"
+ links:
+  - redis
+redis:
+ image: redis
+ ports:
+  - "6379:6379"
