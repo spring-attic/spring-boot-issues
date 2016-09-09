@@ -87,9 +87,10 @@ abstract class BaseFilter implements Filter, BeanNameAware {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
-		tracer.trace("before:" + label);
+		DispatcherType type = request.getDispatcherType();
+		tracer.trace("before:" + label  + "[" + type + "]");
 		chain.doFilter(request, response);
-		tracer.trace("after:" + label);
+		tracer.trace("after:" + label  + "[" + type + "]");
 	}
 
 	@Override
