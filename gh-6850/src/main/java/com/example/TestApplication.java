@@ -26,12 +26,12 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 @RestController
 public class TestApplication {
-	
+
 	@RequestMapping("/")
 	public String home() {
 		return "Hello";
 	}
-	
+
 	@Bean
 	public FilterRegistrationBean oneFilterRegistration(OneFilter filter) {
 		FilterRegistrationBean bean = new FilterRegistrationBean(filter);
@@ -55,26 +55,29 @@ public class TestApplication {
 @Component
 class Tracer {
 	private List<String> list = Collections.synchronizedList(new ArrayList<>());
+
 	public void reset() {
 		list.clear();
 	}
+
 	public void trace(String item) {
 		list.add(item);
 	}
+
 	public List<String> getTraces() {
 		return list;
 	}
 }
 
 abstract class BaseFilter implements Filter, BeanNameAware {
-	
+
 	private final Tracer tracer;
 	private String label;
 
 	public BaseFilter(Tracer tracer) {
 		this.tracer = tracer;
 	}
-	
+
 	@Override
 	public void setBeanName(String name) {
 		this.label = name;
@@ -88,15 +91,19 @@ abstract class BaseFilter implements Filter, BeanNameAware {
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
 		DispatcherType type = request.getDispatcherType();
-		tracer.trace("before:" + label  + "[" + type + "]");
-		chain.doFilter(request, response);
-		tracer.trace("after:" + label  + "[" + type + "]");
+		tracer.trace("before:" + label + "[" + type + "]");
+		try {
+			chain.doFilter(request, response);
+		}
+		finally {
+			tracer.trace("after:" + label + "[" + type + "]");
+		}
 	}
 
 	@Override
 	public void destroy() {
 	}
-	
+
 }
 
 @Component
@@ -105,13 +112,14 @@ class OneFilter extends BaseFilter {
 	public OneFilter(Tracer tracer) {
 		super(tracer);
 	}
-	
+
 }
+
 @Component
 class TwoFilter extends BaseFilter {
 
 	public TwoFilter(Tracer tracer) {
 		super(tracer);
 	}
-	
+
 }

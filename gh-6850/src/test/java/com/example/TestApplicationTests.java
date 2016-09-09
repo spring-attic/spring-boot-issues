@@ -29,14 +29,16 @@ public class TestApplicationTests {
 	}
 
 	@Test
-	public void sunnyDay() {
+	public void sunnyDay() throws InterruptedException {
 		template.getForObject("http://localhost:" + port + "/", String.class);
+		Thread.sleep(500L);
 		System.err.println("OK: " + tracer.getTraces());
 	}
 
 	@Test
-	public void errorPage() {
+	public void errorPage() throws InterruptedException {
 		template.getForObject("http://localhost:" + port + "/notthere", String.class);
+		Thread.sleep(500L);
 		System.err.println("Not OK: " + tracer.getTraces());
 	}
 
