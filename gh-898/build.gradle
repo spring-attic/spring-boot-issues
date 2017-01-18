@@ -1,0 +1,52 @@
+def vJavaLang = '1.8'
+def javaProjects = [project(':myproject-a')]
+def bootProjects = javaProjects
+
+
+buildscript {
+    ext {
+        springBootVersion = '1.1.0.M1'
+        springLoadedVersion = '1.2.0.RELEASE'
+    }
+    repositories {
+        // NOTE: You should declare only repositories that you need here
+        mavenLocal()
+        mavenCentral()
+        maven { url "http://repo.spring.io/release" }
+        maven { url "http://repo.spring.io/milestone" }
+        maven { url "http://repo.spring.io/snapshot" }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("org.springframework:springloaded:${springLoadedVersion}")
+    }
+}
+
+configure(allprojects) {
+    apply plugin: 'eclipse'
+    apply plugin: 'idea'
+
+}
+
+configure(javaProjects) {
+    apply plugin: 'java'
+    targetCompatibility = vJavaLang
+    sourceCompatibility = vJavaLang
+
+    repositories {
+        // NOTE: You should declare only repositories that you need here
+        mavenLocal()
+        mavenCentral()
+        maven { url "http://repo.spring.io/release" }
+        maven { url "http://repo.spring.io/milestone" }
+        maven { url "http://repo.spring.io/snapshot" }
+    }
+}
+
+configure(bootProjects) {
+    apply plugin: 'spring-boot'
+}
+
+
+
+task wrapper(type: Wrapper) { gradleVersion = '1.12' }
