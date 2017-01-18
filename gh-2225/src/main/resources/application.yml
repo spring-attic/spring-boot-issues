@@ -1,0 +1,47 @@
+spring:
+  application:
+    name: JodaBootBugs
+    version: 1.0
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML5
+    cache: true
+    encoding: UTF-8
+  mobile:
+    devicedelegatingviewresolver:
+      enabled: true
+  resources:
+    cache-period: 3600
+  jackson:
+    date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
+    serialization:
+      write-dates-as-timestamps: false
+flyway:
+  enabled: false
+  init-on-migrate: true
+  locations: db/migration/common,db/migration/postgres
+info:
+  build:
+    artifact=${project.artifactId}
+    name=${project.name}
+    description=${project.description}
+    version=${project.version}
+app:
+  timezone: America/New_York
+  media:
+    avatar-thumb-dir: /img/avatars/100x100/
+    audio-head2head-dir: /audio/head2head/
+    badges-dir: /img/badges/
+    emmi-base-url: https://stageemmi.emmisolutions.com
+  content:
+    dir: content
+  user-profile:
+    minimum-age: 10
+    maximum-age: 110
+  health-scratch:
+    timezone: America/New_York
+    reset-hour: 4
+    reset-minute: 0
+  session-timeout: 15
+
