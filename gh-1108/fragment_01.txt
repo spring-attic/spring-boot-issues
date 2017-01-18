@@ -1,0 +1,17 @@
+$ GITHUB_TOKEN=ccdbf257f052a594a0e7bd2823a69ae38a48ffb1 mvn clean spring-boot:run
+[INFO] Scanning for projects...
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Issue Manager 0.0.1-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+...
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (v1.1.1.RELEASE)
+
+2014-06-11 16:55:13.685  INFO 54449 --- [           main] learningspringboot.Application           : Starting Application on retina with PID 54449 (/Users/gturnquist/Dropbox/learning_spring_boot/2/issue-manager-3/target/classes started by gturnquist in /Users/gturnquist/Dropbox/learning_spring_boot/2/issue-manager-3)
+...
