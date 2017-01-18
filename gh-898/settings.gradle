@@ -1,0 +1,3 @@
+rootProject.name = 'gh-898'
+
+include 'myproject-a'
