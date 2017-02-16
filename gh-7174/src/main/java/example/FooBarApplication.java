@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class FooBarApplication {
 
-  @Autowired FooBarService service;
+  @Autowired FooService fooService;
+  @Autowired BarService barService;
 
   public static void main(String[] args) {
     SpringApplication.run(FooBarApplication.class, args);
@@ -18,12 +19,12 @@ public class FooBarApplication {
 
   @GetMapping("/foo")
   public String foo() {
-    return service.foo();
+    return fooService.foo();
   }
 
   @GetMapping("/bar")
   public void bar() {
-    service.bar();
+    barService.bar();
   }
 
   @ExceptionHandler(RuntimeException.class)
