@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<!--
+
+	As of June 2011, the official documentation states
+	As shall become clear, the syntax of logback configuration files is extremely flexible. As such, it is not possible specify the allowed syntax with a DTD file or an XML Schema.
+	http://stackoverflow.com/questions/5731162/xml-schema-or-dtd-for-logback-xml
+
+	This file is the default logback configuration for Spring Boot. To use the same
+	defaults and add custom logger levels you can copy this file and add additional
+	overrides, e.g:
+
+	<include resource="org/springframework/boot/logging/logback/base.xml"/>
+	<logger name="org.springframework.web" level="DEBUG"/>
+	...
+
+	-->
+
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+ 	<property name="SQL_LOG_FILE" value="${SQL_LOG_FILE:-${LOG_PATH:-${java.io.tmpdir:-/tmp}/}elrc_sql.log}"/>
+
+ 	<appender name="SQL"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<encoder>
+			<pattern>${FILE_LOG_PATTERN}</pattern>
+		</encoder>
+		<file>${SQL_LOG_FILE}</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<fileNamePattern>${SQL_LOG_FILE}.%i</fileNamePattern>
+		</rollingPolicy>
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>10MB</MaxFileSize>
+		</triggeringPolicy>
+	</appender>
+
+	<!-- Change to DEBUG to see SQL -->
+	<logger name="org.hibernate" />
+	<!-- Change to DEBUG to see SQL -->
+	<logger name="org.hibernate.SQL" />
+	<!-- Change to TRACE to see bindings -->
+	<logger name="org.hibernate.type" />
+	<!-- Change to DEBUG to see ddl statements -->
+	<logger name="org.hibernate.tool.hbm2ddl" />
+
+	<logger name="com.edlogics.badges.checks" />
+
+	<logger name="org.springframework" />
+	<logger name="org.springframework.security" />
+	<logger name="org.springframework.webflow" />
+
+	<logger name="utility-mode" level="DEBUG" additivity="false">
+        <appender-ref ref="SQL"/>
+    </logger>
+
+	<root level="INFO">
+		<appender-ref ref="CONSOLE" />
+	</root>
+</configuration>
