@@ -1,0 +1,19 @@
+group 'com.sas.test.example'
+version '1.0.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'maven'
+
+task wrapper(type: Wrapper) {
+   gradleVersion = '2.12'
+}
+
+repositories {
+    mavenLocal()
+}
+
+dependencies {
+    compile 'com.sas.test.example:b:1.0.0-SNAPSHOT'
+    //runtime 'com.sas.test.example:c:1.+'
+}
