@@ -1,0 +1,35 @@
+
+
+spring:
+    profiles.active: development
+    
+    freemarker.checkTemplateLocation: false
+    
+# Logging
+logging:
+    config: "classpath:/logback.xml"
+    path: ./
+    level.: INFO
+
+# tcp port to serve the HTTP application on (only affects embedded container deployment)
+server.port: 8080
+
+#Actuator info endpoint - get props from gradle settings
+info.build:
+    name: my-sample-app
+    description: issue 2817
+    version: 1.0.0
+
+# Workaround to fix jmx endpoints in tomcat. TODO: figure out how to replace jmx beans on redeployment
+endpoints.jmx.unique-names: true
+# Expose all health information on the /health endpoint
+endpoints.health.sensitive: false
+
+myApp.directories:
+    external: static/external # Absolute or relative to the path from which the jvm was executed(usually the project root).
+    audio: audio # Relative to external (previous)
+    
+
+
+       
+
