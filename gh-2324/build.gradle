@@ -1,0 +1,42 @@
+buildscript {
+    ext {
+        springBootVersion = '1.2.2.BUILD-SNAPSHOT'
+    }
+    repositories {
+        maven { url "https://repo.spring.io/snapshot" }
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'spring-boot'
+apply plugin: 'war'
+
+
+
+war {
+    baseName = 'spring-boot-logging-issue'
+    version = ''
+}
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    maven { url "https://repo.spring.io/snapshot" }
+    mavenCentral()
+}
+
+configurations {
+    providedRuntime
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web:1.2.2.BUILD-SNAPSHOT")
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.2.1'
+}
