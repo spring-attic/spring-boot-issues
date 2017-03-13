@@ -21,6 +21,4 @@ public class MyConfiguration {
 		return new MyBean1();
 	}
 
-	public static class MyBean1 {
-	}
 }
