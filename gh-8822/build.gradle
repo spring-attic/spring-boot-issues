@@ -1,0 +1,42 @@
+apply plugin: 'org.springframework.boot'
+
+buildscript {
+    ext {
+        springBootVersion = '1.5.2.RELEASE'
+    }
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        // http://mvnrepository.com/artifact/org.springframework.boot/spring-boot-gradle-plugin
+        classpath group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: springBootVersion
+    }
+}
+
+wrapper {
+    gradleVersion = '3.4.1'
+    distributionType = Wrapper.DistributionType.ALL
+}
+
+repositories.addAll rootProject.buildscript.repositories
+
+subprojects {
+    repositories.addAll rootProject.buildscript.repositories
+    buildscript.repositories.addAll rootProject.buildscript.repositories
+}
+
+dependencies {
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-loader
+    // should be runtime but JavaDoc @see requires compile for validation
+    compile group: 'org.springframework.boot', name: 'spring-boot-loader', version: springBootVersion
+}
+
+bootRepackage {
+    // https://github.com/spring-projects/spring-boot/issues/1113
+    // https://github.com/spring-projects/spring-boot/issues/8167
+    classifier = 'repack'
+}
+
+jar {
+    manifest.attributes 'Main-Class': 'Main'
+}
