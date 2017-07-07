@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Thymeleaf and Spring Security problem</title>
+</head>
+<body>
+    <h3>Security Info here:</h3>
+    <div>
+        <span sec:authentication="name"></span>
+        has authorities
+        <span sec:authentication="authorities"></span>
+
+        <form sec:authorize-expr="isFullyAuthenticated()" method="post" th:action="@{/logout}">
+            <input value="sign off" type="submit"/>
+        </form>
+
+        <form sec:authorize-expr="!isFullyAuthenticated()" method="post" th:action="@{/login}">
+            <label> User:<input type="text" name="username"/> </label>
+            <label> Password:<input type="password" name="password"/> </label>
+            <input type="submit" value="sign on"/>
+        </form>
+    </div>
+    <hr/>
+    <div>
+        <a sec:authorize-url="GET /secure" href="/secure">Secure page</a>
+    </div>
+</body>
+</html>
