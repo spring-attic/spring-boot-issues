@@ -12,12 +12,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.issues.gh10465.config.JpaConfig;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-@SpringBootTest(classes = { /*TestConfig.class,*/ JpaConfig.class })
+//@SpringBootTest(classes = { TestConfig.class, JpaConfig.class }) // not recommended
+@ContextConfiguration(classes = { /* TestConfig.class, */ JpaConfig.class })
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @Transactional(propagation = Propagation.NOT_SUPPORTED)
