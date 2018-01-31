@@ -1,0 +1,11 @@
+# gh-11863
+
+The reproduce application for https://github.com/spring-projects/spring-boot/issues/11863[gh-11863].
+
+## How to run, the tests would hang
+
+[source,text]
+----
+$ ./gradlew build
+----
+
