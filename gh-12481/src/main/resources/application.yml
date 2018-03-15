@@ -1,0 +1,7 @@
+logging:
+  level:
+    org.springframework.ui: debug
+spring:
+  freemarker:
+    template-loader-path: file:./../dist
+    suffix: .html
