@@ -1,0 +1,36 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.3.RELEASE")
+    }
+}
+
+apply plugin: 'war'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+task bootRunWar(type: JavaExec) {
+    dependsOn bootWar
+
+    main '-jar'
+    args("${bootWar.outputs.files.singleFile}")
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-starter-tomcat")
+    compile("org.springframework.boot:spring-boot-devtools")
+}
+
+wrapper {
+    gradleVersion = '4.10'
+}

@@ -1,0 +1,19 @@
+# warResource.txt can be successfully retrieved when the Range header is not present:
+
+GET http://localhost:8080/warResource.txt
+
+###
+
+# When a valid Range header is added to the request, it fails with an HTTP 416.
+
+GET http://localhost:8080/warResource.txt
+Range: bytes=0-
+
+###
+
+# The Range header works fine with resources hosted from the classpath:
+
+GET http://localhost:8080/classpathResource.txt
+Range: bytes=0-
+
+###
