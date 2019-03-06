@@ -6,7 +6,7 @@ def calcSkipTests() {
 	// gradle.properties prop can be overridden from command line with -Pskip.tests=someValue 
 	// skipTests feature can also be set by command line e.g. -Dskip.tests=true|false
     
-    //  http://www.gradle.org/docs/current/userguide/gradle_command_line.html 
+    //  https://www.gradle.org/docs/current/userguide/gradle_command_line.html 
     // command-line options and system properties take precedence over environment variables.
     
     String skipTestsKey = 'skip.tests';

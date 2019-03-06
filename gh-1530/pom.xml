@@ -12,10 +12,10 @@
     <packaging>war</packaging>
     
     <description>Spring Boot gh-1530 issue PoC</description>
-    <url>http://projects.spring.io/spring-boot/</url>
+    <url>https://projects.spring.io/spring-boot/</url>
     <organization>
         <name>Pivotal Software, Inc.</name>
-        <url>http://www.spring.io</url>
+        <url>https://www.spring.io</url>
     </organization>
     
     <properties>
@@ -153,7 +153,7 @@
         <repository>
             <id>spring-snapshots</id>
             <name>Spring Snapshots</name>
-            <url>http://repo.spring.io/snapshot</url>
+            <url>https://repo.spring.io/snapshot</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
@@ -161,7 +161,7 @@
         <repository>
             <id>spring-milestones</id>
             <name>Spring Milestones</name>
-            <url>http://repo.spring.io/milestone</url>
+            <url>https://repo.spring.io/milestone</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
@@ -169,7 +169,7 @@
         <repository>
             <id>spring-releases</id>
             <name>Spring Releases</name>
-            <url>http://repo.spring.io/release</url>
+            <url>https://repo.spring.io/release</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
@@ -179,7 +179,7 @@
         <pluginRepository>
             <id>spring-releases</id>
             <name>Spring Releases</name>
-            <url>http://repo.spring.io/release</url>
+            <url>https://repo.spring.io/release</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
@@ -187,7 +187,7 @@
         <pluginRepository>
             <id>spring-snapshots</id>
             <name>Spring Snapshots</name>
-            <url>http://repo.spring.io/snapshot</url>
+            <url>https://repo.spring.io/snapshot</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
