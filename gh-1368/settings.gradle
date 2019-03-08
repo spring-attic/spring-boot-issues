@@ -1,4 +1,0 @@
-rootProject.name = 'gh-1368'
-
-include 'gh-1368-main-app'
-include 'gh-1368-common'
