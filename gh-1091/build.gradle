@@ -205,7 +205,7 @@ def testOutputFilter1( descriptor, event ) {
             /* filter out logging messages that are happening before logback.groovy
                  they have a different format */
             // skips << sMsg.contains(  " |-INFO " );
-            // http://www.autohotkey.com/docs/misc/RegEx-QuickRef.htm
+            // https://www.autohotkey.com/docs/misc/RegEx-QuickRef.htm
             skips << sMsg.matches( /\d+:\d+:\d+,\d+\s+\|\-\w.*/ )
 
             def skip = skips.any();
